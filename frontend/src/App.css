@@ -1,0 +1,89 @@
+form{
+  width: 50%;
+  margin: auto;
+  background-color: rgba(10, 10, 10, 0.05);
+  padding: 5%;
+}
+
+label, input, button{
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  outline: none;
+}
+
+button{
+  width: 200px;
+  text-align: center;
+}
+
+h2{
+  color: red;
+  font-size: 2rem;
+}
+
+.labas{
+  text-align: center;
+}
+
+.labas button{
+  background: #e6e6e6;
+  margin-top: 10px;
+}
+
+.button-primary{
+  margin-top: 5px;
+  text-align: center;
+}
+
+#todo-input{
+  margin-top: 5px;
+  width: 100%;
+}
+
+.loob #link{
+  text-align: center;
+  font-size: 20px;
+}
+
+.todo{
+  width: 90%;
+  margin: auto;
+  background-color: rgba(10, 10, 10, 0.05);
+  box-shadow: 6px 6px 14px 0 rgba(0, 0, 0, 0.2), -8px -8px 18px 0 rgba(255, 255, 255, 0.55);
+  border-radius: 20px;
+}
+
+.card{
+  margin-top: 10px;
+  background-color: rgba(10, 10, 10, 0.05);
+  box-shadow: 6px 6px 14px 0 rgba(0, 0, 0, 0.2), -8px -8px 18px 0 rgba(255, 255, 255, 0.55);
+  border-radius: 10px;
+}
+
+.card label{
+  font-size: 2rem;
+  margin: 20px 10px;
+}
+
+.greenButton{
+  box-shadow: 6px 6px 14px 0 rgba(0, 0, 0, 0.2), -8px -8px 18px 0 rgba(255, 255, 255, 0.55);
+  background: #dfdfdf;;
+  color: green;
+  outline: none;
+}
+
+.redButton{
+  box-shadow: 6px 6px 14px 0 rgba(0, 0, 0, 0.2), -8px -8px 18px 0 rgba(255, 255, 255, 0.55);
+  background: #dfdfdf;
+  color: red;
+  outline: none;
+}
+
+.card button:hover{
+  background: rgb(147, 218, 96);
+  color: black;
+  font-size: 2.5rem;
+}
+
+.gitna{
+  margin: 5px;
+}
