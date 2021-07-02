@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { CredentialContext } from "../App";
+import axios from "axios";
 
 export default function Todo(){
     const [todos, setTodos] = useState("");
@@ -8,26 +9,45 @@ export default function Todo(){
     const [credentials] = useContext(CredentialContext);
 
     const persist = (todos) => {
-        fetch(`http://localhost:4000/todos`, {
+        axios({
+            url: "/todos",
             method: "POST",
-            headers: {
+            headers:{
                 "Content-Type": "application/json",
-                Authorization: `Basic ${credentials.username}:${credentials.password}`,
+                 Authorization: `Basic ${credentials.username}:${credentials.password}`
             },
-            body: JSON.stringify(todos),
-            }).then(() => {});
+            data: todos
+        }).then(()=>{})
+        // fetch(`http://localhost:4000/todos`, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         Authorization: `Basic ${credentials.username}:${credentials.password}`,
+        //     },
+        //     body: JSON.stringify(todos),
+        //     }).then(() => {});
         };
 
     useEffect(() => {
-        fetch(`http://localhost:4000/todos`, {
-            method: "GET",
-            headers: {
+        axios({
+            url:"/todos",
+            method:"GET",
+            headers:{
                 "Content-Type": "application/json",
-                Authorization: `Base ${credentials.username}:${credentials.password}`,
-            },
-          })
-            .then((response) => response.json())
+                Authorization: `Base ${credentials.username}:${credentials.password}`
+            }
+        })
+            .then((response) => response.data)
             .then((todos) => setTodoArray(todos));
+        // fetch(`http://localhost:4000/todos`, {
+        //     method: "GET",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         Authorization: `Base ${credentials.username}:${credentials.password}`,
+        //     },
+        //   })
+        //     .then((response) => response.json())
+        //     .then((todos) => setTodoArray(todos));
         },);
 
     const addTodo = (e) => {
@@ -41,27 +61,45 @@ export default function Todo(){
     };
 
     const updateTodo = (id) =>{
-        fetch(`http://localhost:4000/update`, {
+        axios({
+            url: "/update",
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Basic ${credentials.username}:${credentials.password}`,
             },
-            body: JSON.stringify({id}),
-            }).then(() => {});
+            data:{id}
+        }).then(()=>{})
+        // fetch(`http://localhost:4000/update`, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         Authorization: `Basic ${credentials.username}:${credentials.password}`,
+        //     },
+        //     body: JSON.stringify({id}),
+        //     }).then(() => {});
         };
 
 
 
     const deleteTodo = (id) =>{
-        fetch(`http://localhost:4000/delete`, {
-            method: "DELETE",
+        axios({
+            url: "/delete",
+            method:"DELETE",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Basic ${credentials.username}:${credentials.password}`,
             },
-            body: JSON.stringify({id}),
-            }).then(() => {});
+            data:{id}
+        }).then(()=>{})
+        // fetch(`http://localhost:4000/delete`, {
+        //     method: "DELETE",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         Authorization: `Basic ${credentials.username}:${credentials.password}`,
+        //     },
+        //     body: JSON.stringify({id}),
+        //     }).then(() => {});
         };
     
 

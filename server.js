@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import User from "./model/User.js";
 import Todos from "./model/Todos.js";
 import mongoose from "mongoose";
-import path from "path";
+import axios from "axios";
 
 dotenv.config();
 const app = express();

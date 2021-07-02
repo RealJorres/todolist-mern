@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import  { useHistory } from "react-router-dom";
 import { CredentialContext } from "../App";
@@ -14,19 +15,25 @@ export default function Login(){
 
     const login = (e) =>{
         e.preventDefault();
-        fetch(`http://localhost:4000/login`, {
-            method: "POST",
+        axios({
+            url:"/login",
+            method:"POST",
             headers:{"Content-Type": "application/json"},
-            body: JSON.stringify({
-                username, 
-                password
-            }),
+            data: {username, password}
         })
+        // fetch(`http://localhost:4000/login`, {
+        //     method: "POST",
+        //     headers:{"Content-Type": "application/json"},
+        //     body: JSON.stringify({
+        //         username, 
+        //         password
+        //     }),
+        // })
             .then(async (res) => {
-                if(!res.ok){
-                    const {message} = await res.json();
+                if(!res.status === 200){
+                    const {message} = await res.data;
                     throw Error(message);
-                }return res.json();
+                }return res.data;
             })
             .then((data) => {
                 setCredentials({username, password,});

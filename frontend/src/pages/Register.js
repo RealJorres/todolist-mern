@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import  { useHistory } from "react-router-dom";
 import { CredentialContext } from "../App";
+import axios from 'axios';
 
 
 export default function Register(){
@@ -14,21 +15,28 @@ export default function Register(){
 
     const register = (e) =>{
         e.preventDefault();
-        fetch(`http://localhost:4000/register`, { 
-            method: "POST", 
+        axios({
+            url:"/register",
+            method:"POST",
             headers:{
-                "Content-Type": "application/json"}, 
-            body: JSON.stringify({
-                username, 
-                password, 
-                confirmpassword
-            }),
+                "Content-Type": "application/json"},
+            data : {username, password, confirmpassword}
         })
+        // fetch(`http://localhost:4000/register`, { 
+        //     method: "POST", 
+        //     headers:{
+        //         "Content-Type": "application/json"}, 
+        //     body: JSON.stringify({
+        //         username, 
+        //         password, 
+        //         confirmpassword
+        //     }),
+        // })
             .then(async(res) =>{
-                if(!res.ok){
-                    const {message} = await res.json();
+                if(!res.status === 200){
+                    const {message} = await res.data;
                     throw Error(message);
-                }return res.json();
+                }return res.data;
             })
             .then(async (data)=>{
                 setCredentials({
