@@ -8,7 +8,7 @@ export default function Todo(){
     const [credentials] = useContext(CredentialContext);
 
     const persist = (todos) => {
-        fetch(`http://localhost:${process.env.PORT}/todos`, {
+        fetch(`http://localhost:4000/todos`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export default function Todo(){
         };
 
     useEffect(() => {
-        fetch(`http://localhost:${process.env.PORT}/todos`, {
+        fetch(`http://localhost:4000/todos`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -41,7 +41,7 @@ export default function Todo(){
     };
 
     const updateTodo = (id) =>{
-        fetch(`http://localhost:${process.env.PORT}/update`, {
+        fetch(`http://localhost:4000/update`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -54,7 +54,7 @@ export default function Todo(){
 
 
     const deleteTodo = (id) =>{
-        fetch(`http://localhost:${process.env.PORT}/delete`, {
+        fetch(`http://localhost:4000/delete`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
