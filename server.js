@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import User from "./model/User.js";
 import Todos from "./model/Todos.js";
 import mongoose from "mongoose";
+import path from "path";
 
 dotenv.config();
 const app = express();
@@ -11,6 +12,16 @@ const port =process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
+
+//Step
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static(path.join(__dirname, ' frontend', 'build')));
+};
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
+});
+
 
 //Connect to MongoDB
 const dbURI = process.env.CLOUD_DB_URI;
@@ -97,7 +108,3 @@ app.delete("/delete", async (req, res)=>{
   res.json({message:"deleted"})
 });
 
-//Step
-if(process.env.NODE_ENV === 'production'){
-  app.use(express.static('frontend/build'));
-}
