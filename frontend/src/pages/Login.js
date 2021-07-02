@@ -14,7 +14,7 @@ export default function Login(){
 
     const login = (e) =>{
         e.preventDefault();
-        fetch(`http://localhost:4000/login`, {
+        fetch(`http://localhost:${process.env.PORT}/login`, {
             method: "POST",
             headers:{"Content-Type": "application/json"},
             body: JSON.stringify({

@@ -14,7 +14,7 @@ export default function Register(){
 
     const register = (e) =>{
         e.preventDefault();
-        fetch(`http://localhost:4000/register`, { 
+        fetch(`http://localhost:${process.env.PORT}/register`, { 
             method: "POST", 
             headers:{
                 "Content-Type": "application/json"}, 
