@@ -11,7 +11,7 @@ export default function Todo(){
 
     const persist = (todos) => {
         axios({
-            url: "http://localhost:4000/todos",
+            url: "/todos",
             method: "POST",
             headers:{
                 "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export default function Todo(){
 
     useEffect(() => {
         axios({
-            url:"http://localhost:4000/todos",
+            url:"/todos",
             method:"GET",
             headers:{
                 "Content-Type": "application/json",
@@ -46,7 +46,7 @@ export default function Todo(){
 
     const doneTodo = (id) =>{
         axios({
-            url: "http://localhost:4000/done",
+            url: "/done",
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -58,7 +58,7 @@ export default function Todo(){
 
     const deleteTodo = (id) =>{
         axios({
-            url: "http://localhost:4000/delete",
+            url: "/delete",
             method:"DELETE",
             headers: {
                 "Content-Type": "application/json",

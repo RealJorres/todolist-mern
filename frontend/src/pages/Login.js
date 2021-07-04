@@ -21,14 +21,6 @@ export default function Login(){
             headers:{"Content-Type": "application/json"},
             data: {username, password}
         })
-        // fetch(`http://localhost:4000/login`, {
-        //     method: "POST",
-        //     headers:{"Content-Type": "application/json"},
-        //     body: JSON.stringify({
-        //         username, 
-        //         password
-        //     }),
-        // })
             .then(async (res) => {
                 if(!res.status === 200){
                     const {message} = await res.json();
