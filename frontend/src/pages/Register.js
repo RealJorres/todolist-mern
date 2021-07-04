@@ -48,7 +48,16 @@ export default function Register(){
                 history.push("/");
             })
             .catch((err)=>{
-                setError(err.message);
+                if(err.message === "Request failed with status code 403"){
+                    setError("Username already exists!");
+                }else if(err.message === "Request failed with status code 406"){
+                    setError("Password doesn't match!");
+                }else if(err.message === "Request failed with status code 411"){
+                    setError("Empty field is not allowed!");
+                }else{
+                    setError(err.message);
+                }
+                
             });
     };
     const history = useHistory();

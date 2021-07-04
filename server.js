@@ -38,19 +38,19 @@ app.post("/register", async (req, res) => {
   const { username, password , confirmpassword} = req.body;
   const user = await User.findOne({ username }).exec();
   if (user) {
-    res.status(500);
+    res.status(403);
     res.json({
       message: "User already exists!",
     });
     return;
   }
   if(username == "" || password == "" || confirmpassword == ""){
-    res.status(500);
+    res.status(411);
     res.json({message: "Empty field is not allowed!"})
     return;
   }
   if(password !== confirmpassword){
-    res.status(500);
+    res.status(406);
     res.json({message: "Password doesn't match!"})
     return;
   }
@@ -65,9 +65,7 @@ app.post("/login", async (req, res) => {
   const user = await User.findOne({ username }).exec();
   if (!user || user.password !== password) {
     res.status(403);
-    res.json({
-      message: "invalid login",
-    });
+    res.json({message: "User not found!",});
     return;
   }
   res.json({
@@ -92,7 +90,7 @@ app.get("/todos", async (req, res) => {
   await Todos.find({createdBy: username }).exec((err, value) =>{res.json(value)});
 });
 
-app.post("/update", async (req, res) =>{
+app.post("/done", async (req, res) =>{
   const ID = req.body;
   await Todos.findByIdAndUpdate(ID.id , {'done' : true}).exec();
   res.json({message: "updated"});
@@ -101,6 +99,6 @@ app.post("/update", async (req, res) =>{
 app.delete("/delete", async (req, res)=>{
   const ID = req.body;
   await Todos.findByIdAndDelete(ID.id).exec();
-  res.json({message:"deleted"})
+  res.json({message:"deleted"});
 });
 

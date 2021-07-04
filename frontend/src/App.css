@@ -65,25 +65,42 @@ h2{
 }
 
 .greenButton{
-  box-shadow: 6px 6px 14px 0 rgba(0, 0, 0, 0.2), -8px -8px 18px 0 rgba(255, 255, 255, 0.55);
   background: #dfdfdf;;
   color: green;
   outline: none;
+  width: 30%;
+  margin: 10px
 }
 
 .redButton{
-  box-shadow: 6px 6px 14px 0 rgba(0, 0, 0, 0.2), -8px -8px 18px 0 rgba(255, 255, 255, 0.55);
   background: #dfdfdf;
   color: red;
   outline: none;
+  width: 30%;
+  margin: 10px
 }
 
 .card button:hover{
   background: rgb(147, 218, 96);
   color: black;
-  font-size: 2.5rem;
 }
 
 .gitna{
   margin: 5px;
+}
+
+.strike{
+  color: gray;
+  padding-left: 20px;
+  text-decoration: line-through;
+}
+
+.content{
+  margin: 20px;
+}
+
+.small{
+  margin: 10px;
+  color: gray;
+  font-size: 1.2rem;
 }

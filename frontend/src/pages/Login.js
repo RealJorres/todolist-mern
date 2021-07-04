@@ -31,7 +31,7 @@ export default function Login(){
         // })
             .then(async (res) => {
                 if(!res.status === 200){
-                    const {message} = await res.data;
+                    const {message} = await res.json();
                     throw Error(message);
                 }return res.data;
             })
@@ -42,7 +42,11 @@ export default function Login(){
                 history.push("/");
             })
             .catch((err) => {
-                setError(err.message);
+                if(err.message === "Request failed with status code 403"){
+                    setError("User not found!");
+                }else{
+                    setError(err.message);
+                }
             });
     };
     const history = useHistory();
