@@ -83,7 +83,7 @@ export default function Todo(){
             <div key={todo} className='row card'>
                 <div className='twelve columns'>
                     <label className='content'>{todo.content}</label>
-                    <p className='content small'>Created {moment(todo.dateCreated).fromNow()}</p>
+                    <p className='content small'> Date created: {moment(todo.dateCreated).format('LLL')}</p>
                     <button id={todo._id} onClick={()=>{doneTodo(todo._id)}} title="Mark as 'Done'" className='greenButton'>DONE</button>
                 </div>
             </div>
@@ -92,6 +92,7 @@ export default function Todo(){
             <div key={todo} className='row card'>
                 <div className='twelve columns'>
                     <label className='content strike'>{todo.content}</label>
+                    <p className='content small'>Date completed: {moment(todo.dateCreated).format('LLL')}</p>
                     <button id={todo._id} onClick={()=>{deleteTodo(todo._id)}} title="Delete 'Todo-item'" className='redButton'>DELETE</button>
                 </div>
             </div>

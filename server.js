@@ -92,7 +92,7 @@ app.get("/todos", async (req, res) => {
 
 app.post("/done", async (req, res) =>{
   const ID = req.body;
-  await Todos.findByIdAndUpdate(ID.id , {'done' : true}).exec();
+  await Todos.findByIdAndUpdate(ID.id , {'done' : true, 'dateCreated' : Date.now()}).exec();
   res.json({message: "updated"});
 });
 
