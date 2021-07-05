@@ -4,7 +4,6 @@ import dotenv from "dotenv";
 import User from "./model/User.js";
 import Todos from "./model/Todos.js";
 import mongoose from "mongoose";
-import axios from "axios";
 
 dotenv.config();
 const app = express();
@@ -79,7 +78,8 @@ app.post("/todos", async (req, res) => {
   const [, token] = authorization.split(" ");
   const [username, ] = token.split(":");
   const todosItem = req.body.text;
-  await Todos.create({createdBy: username, content: todosItem});
+  const date = req.body.dateCreated;
+  await Todos.create({createdBy: username, content: todosItem, dateCreated: date});
   res.json({message: "new content saved!"});
 });
 

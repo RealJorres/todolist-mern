@@ -2,6 +2,10 @@ import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import  { useHistory } from "react-router-dom";
 import { CredentialContext } from "../App";
+import { trackPromise } from 'react-promise-tracker';
+import { usePromiseTracker } from "react-promise-tracker";
+import Loader from 'react-loader-spinner';
+
 
 
 
@@ -15,6 +19,7 @@ export default function Login(){
 
     const login = (e) =>{
         e.preventDefault();
+        trackPromise(
         axios({
             url:"/login",
             method:"POST",
@@ -39,8 +44,27 @@ export default function Login(){
                 }else{
                     setError(err.message);
                 }
-            });
+            }));
     };
+
+    const LoadingIndicator = props => {
+        const { promiseInProgress } = usePromiseTracker();
+        return (
+            promiseInProgress && 
+            <div
+            style={{
+                width: "100%",
+                height: "5",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}
+            >
+            <Loader type="TailSpin" color="#FF0000" height='20' width='100' />
+            </div>
+        );  
+    }
+    
     const history = useHistory();
 
     return <form onSubmit={login}>
@@ -51,5 +75,6 @@ export default function Login(){
         <label>Password: </label>
         <input onChange={(e)=> setPassword(e.target.value)} type='password' placeholder='Enter password'/><br></br><br></br>
         <button>Login</button>
+        <LoadingIndicator/>
     </form>
 }

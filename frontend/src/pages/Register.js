@@ -2,6 +2,9 @@ import React, { useContext, useState } from 'react';
 import  { useHistory } from "react-router-dom";
 import { CredentialContext } from "../App";
 import axios from 'axios';
+import { trackPromise } from 'react-promise-tracker';
+import { usePromiseTracker } from "react-promise-tracker";
+import Loader from 'react-loader-spinner';
 
 
 export default function Register(){
@@ -15,6 +18,7 @@ export default function Register(){
 
     const register = (e) =>{
         e.preventDefault();
+        trackPromise(
         axios({
             url:"/register",
             method:"POST",
@@ -22,16 +26,6 @@ export default function Register(){
                 "Content-Type": "application/json"},
             data : {username, password, confirmpassword}
         })
-        // fetch(`http://localhost:4000/register`, { 
-        //     method: "POST", 
-        //     headers:{
-        //         "Content-Type": "application/json"}, 
-        //     body: JSON.stringify({
-        //         username, 
-        //         password, 
-        //         confirmpassword
-        //     }),
-        // })
             .then(async(res) =>{
                 if(!res.status === 200){
                     const {message} = await res.data;
@@ -58,8 +52,27 @@ export default function Register(){
                     setError(err.message);
                 }
                 
-            });
+            }))
     };
+
+    const LoadingIndicator = props => {
+        const { promiseInProgress } = usePromiseTracker();
+        return (
+            promiseInProgress && 
+            <div
+            style={{
+                width: "100%",
+                height: "5",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}
+            >
+            <Loader type="TailSpin" color="#FF0000" height='20' width='100' />
+            </div>
+        );  
+    }
+
     const history = useHistory();
 
     return <form onSubmit={register}>
@@ -72,5 +85,6 @@ export default function Register(){
         <label>Confirm Password: </label>
         <input onChange={(e)=>setConfimPassword(e.target.value)} type='password' placeholder='Confirm password'/><br></br><br></br>
         <button type='submit'>Register</button>
+        <LoadingIndicator/>
     </form>
 }
